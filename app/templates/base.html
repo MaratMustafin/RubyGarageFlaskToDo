@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }} | Ruby Garage To Do</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/datepicker.min.css') }}">
+	<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+
+</head>
+<body>
+<nav class="border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://rubygarage.com.ua/">Ruby Garage ToDo</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+    <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        {% if current_user.is_anonymous %}
+        <li><a href="{{ url_for('register') }}">Регистрация</a></li>
+        <li><a href="{{ url_for('login') }}">Войти</a></li>
+        {% else %}
+        <li>Привет {{ current_user.username }}!</li>
+        <li><a href="{{ url_for('logout') }}">Выйти</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% block content %}
+{% endblock %}
+{% block js %}
+{% endblock %}
+</body>
+</html>

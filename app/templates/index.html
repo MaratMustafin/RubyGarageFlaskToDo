@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for pr in proj %}
+
+ <div class="paper container">
+    <table>
+      <tbody>
+        <tr>
+          <td> 
+                <span># - {{ pr.project_name }}</span>
+          </td>
+          <td> 
+            <button class="trash" id="{{pr.id}}">удалить</button> 
+          </td>
+          <td>
+            <form class="form-inline" action="{{ url_for('main.update_project') }}" method="POST">     
+              <input type="hidden" value="{{ pr.id }}" name="id">
+              <input style=" margin-left: auto; margin-right: 0.1em;" id="project_name" type="text" placeholder="Поменять название" name="project_name">
+              <button type="submit">обновить</button>    
+            </form>   
+         </td>
+    </tr>
+  </tbody>
+</table>
+
+
+		<table>
+				<tr>
+					<td>activity</td>
+					<td>
+            <form class="form-inline" action="{{ url_for('main.add_task',id=pr.id) }}" method="POST">
+                <input type="text" name="task_name" placeholder="Название таски">
+      					<input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_date" placeholder="Нач.даты-конец.даты">
+      				<input type="range" id="rangeInput" name="rangeInput" min="0" max="5" value="0"oninput="amount.value=rangeInput.value"> <output id="amount" name="amount" for="rangeInput">0</output>
+      					<input style=" margin-left: auto; margin-right: 0.1em;" type="submit" value="+">
+              </form>
+        </td>
+				</tr>
+      <tbody>
+      {% for ts in task %}
+        {% if ts.project_id == pr.id %}
+        {% if ts.task_status == False %}
+	         {% include '_priority.html' %}
+        {% else %}
+          <td>
+             <button class="trash_task" data-id="{{ts.id}}">удалить</button>
+          </td>
+          <td style="background-color: green; color: white;">
+            Задание - {{ ts.task_name }} - выполнено 
+          </td>
+        {% endif %}
+        {% endif %}
+      {% endfor %}
+			</tbody>
+		</table>
+ </div>
+<br>
+<br>
+
+{% endfor %}
+<!-- you here =) -->
+ <div class="row flex-spaces child-borders">
+  <label class="paper-btn margin" for="modal-1">+ Добавить проект</label>
+</div>
+<input class="modal-state" id="modal-1" type="checkbox">
+<div class="modal">
+  <label class="modal-bg" for="modal-1"></label>
+  <div class="modal-body">
+    <h4 class="modal-title">Добавить проект</h4>
+  <form action="{{ url_for('main.add_project') }}" method="POST">
+    <div class="form-group">
+      <label for="paperInputs1">Название</label>
+      <input type="text" placeholder="Введите название" id="paperInputs1" name="name">
+    </div>
+    <input type="submit" class="btn-secondary" value="Добавить">
+  </form>
+    <label for="modal-1" class="modal-link">Закрыть</label>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script
+            src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+     <script src="{{ url_for('static',filename='js/app.js') }}"></script>
+     <script src="{{ url_for('static',filename='js/datepicker.js') }}"></script>
+{% endblock %}
