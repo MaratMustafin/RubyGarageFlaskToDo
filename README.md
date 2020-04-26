@@ -1,7 +1,19 @@
 # RubyGarageFlaskToDo
 Задание для поступления в RubyGarage,выполнено с использованием ЯП **python** и фрейморвка **Flask**
+
 ### __Live Demo__
 [Ruby Garage ToDo](http://apofsyyys.pythonanywhere.com/)
+
+### Запуск программы
+```
+virtualenv rubygarage
+source ./rubygarage/bin/activate
+pip install - requirements.txt
+export FLASK_APP=todo.py
+export FLASK_DEBUG=1
+flask run
+```
+> Если не получилось, тогда заходите в requirements.txt и устанавливайте пакеты по одному, но это врядли =)
 
 ### __Folder Structure__
 ```
