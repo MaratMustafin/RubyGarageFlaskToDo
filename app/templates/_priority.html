@@ -1,40 +1,40 @@
 				<tr data-index="{{ ts.id }}" data-position="{{ ts.position }}">
 					<td><a href="{{ url_for('main.task_done',id=ts.id) }}">done</a></td>
           {% if ts.task_priority==1 %}
-					<td colspan="3" style="background-color:#ffff94">
+					<td colspan="3" style="background-color:#ffff94" id="main_task">
             <form class="form-inline" action="{{ url_for('main.update_task',id=ts.id) }}" method="POST">
               <input type="hidden" value="{{ts.task_name}}" name="task_oldname">
               <input type="hidden" value="{{ts.date}}" name="task_olddate">
             <input type="text" placeholder="{{ts.task_name}}" name="task_newname"><input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_newdate" placeholder="{{ ts.date }}">
-           <button type="submit" value="">upd</button></form><button class="trash_task" data-id="{{ts.id}}">удалить</button></td>
+           <button id="upd_button" type="submit" value="">upd</button></form><button id="del_button" class="trash_task" data-id="{{ts.id}}">удалить</button></td>
           {% elif ts.task_priority==2 %}
-          <td colspan="3" style="background-color:#ffcd00">
+          <td colspan="3" style="background-color:#ffcd00" id="main_task">
             <form class="form-inline" action="{{ url_for('main.update_task',id=ts.id) }}" method="POST">
               <input type="hidden" value="{{ts.task_name}}" name="task_oldname">
               <input type="hidden" value="{{ts.date}}" name="task_olddate">
             <input type="text" placeholder="{{ts.task_name}}" name="task_newname"><input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_newdate" placeholder="{{ ts.date }}">
-           <button type="submit" value="">upd</button></form><button class="trash_task" data-id="{{ts.id}}">удалить</button></td>
+           <button id="upd_button" type="submit" value="">upd</button></form><button id="del_button" class="trash_task" data-id="{{ts.id}}">удалить</button></td>
           {% elif ts.task_priority==3 %}
-          <td colspan="3" style="background-color:#ff9a23">
+          <td colspan="3" style="background-color:#ff9a23" id="main_task">
             <form class="form-inline" action="{{ url_for('main.update_task',id=ts.id) }}" method="POST">
               <input type="hidden" value="{{ts.task_name}}" name="task_oldname">
               <input type="hidden" value="{{ts.date}}" name="task_olddate">
             <input type="text" placeholder="{{ts.task_name}}" name="task_newname"><input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_newdate" placeholder="{{ ts.date }}">
-           <button type="submit" value="">upd</button></form><button class="trash_task" data-id="{{ts.id}}">удалить</button></td>
+           <button id="upd_button" type="submit" value="">upd</button></form><button id="del_button" class="trash_task" data-id="{{ts.id}}">удалить</button></td>
           {% elif ts.task_priority==4 %}
-          <td colspan="3" style="background-color:#ff9a63">
+          <td colspan="3" style="background-color:#ff9a63" id="main_task">
             <form class="form-inline" action="{{ url_for('main.update_task',id=ts.id) }}" method="POST">
               <input type="hidden" value="{{ts.task_name}}" name="task_oldname">
               <input type="hidden" value="{{ts.date}}" name="task_olddate">
             <input type="text" placeholder="{{ts.task_name}}" name="task_newname"><input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_newdate" placeholder="{{ ts.date }}">
-           <button type="submit" value="">upd</button></form><button class="trash_task" data-id="{{ts.id}}">удалить</button></td>
+           <button id="upd_button" type="submit" value="">upd</button></form><button id="del_button" class="trash_task" data-id="{{ts.id}}">удалить</button></td>
           {% elif ts.task_priority==5 %}
-          <td colspan="3" style="background-color:#ed3000;">
+          <td colspan="3" style="background-color:#ed3000;" id="main_task">
             <form class="form-inline" action="{{ url_for('main.update_task',id=ts.id) }}" method="POST">
               <input type="hidden" value="{{ts.task_name}}" name="task_oldname">
               <input type="hidden" value="{{ts.date}}" name="task_olddate">
             <input type="text" placeholder="{{ts.task_name}}" name="task_newname"><input type='text' data-range="true" data-multiple-dates-separator=" - " class="datepicker-here" name="task_newdate" placeholder="{{ ts.date }}">
-           <button type="submit" value="">upd</button></form><button class="trash_task" data-id="{{ts.id}}">удалить</button></td>
+           <button id="upd_button" type="submit" value="">upd</button></form><button id="del_button" class="trash_task" data-id="{{ts.id}}">удалить</button></td>
            {% else %}
           <td colspan="3" style="background-color:#000000; color: white">
           LOL  - пасхалка      

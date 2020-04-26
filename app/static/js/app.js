@@ -74,6 +74,19 @@ $(document).on("click", ".trash", function() {
                   }
                 });
               });
+
+$(document).ready(function() {
+$("td#main_task").mouseover(function(){
+     $("button#del_button").fadeIn();
+     $("button#upd_button").fadeIn();
+ });
+
+$("td#main_task").mouseleave(function(){
+     $("button#del_button").fadeOut();
+     $("button#upd_button").fadeOut();
+  })
+ ;});
+
 /*            $(function () {
 
               $('#updateForm').on('submit', function (e) {

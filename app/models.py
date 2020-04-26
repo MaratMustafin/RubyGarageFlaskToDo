@@ -1,18 +1,30 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 from app import db,login
 
-@login.user_loader
-def load_user(id):
-    return Users.query.get(int(id))
 
 class Projects(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     project_name = db.Column(db.String(50))
     tasks = db.relationship('Tasks',backref='project',lazy='dynamic')
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+
+
+    def if_name_is_empty(self):
+        if self.project_name == "":
+            return True
+        else:
+            return False
+
+    def if_name_is_valid(self):
+        if self.project_name != self.project_name.capitalize():
+            return False 
+        else:
+            return True
+
 
     def __repr__(self):
         return 'Название проекта - {}'.format(self.project_name)
@@ -26,6 +38,12 @@ class Tasks(db.Model):
     date = db.Column(db.String(100)) 
     task_position = db.Column(db.Integer)
     project_id = db.Column(db.Integer,db.ForeignKey('projects.id'))
+
+    def date_time_now(self):
+        if self.date == datetime.utcnow():
+            return True
+        else:
+            return False
 
     def __repr__(self):
         return 'Название таска - {}'.format(self.task_name)
@@ -46,3 +64,7 @@ class Users(UserMixin,db.Model):
 
     def __repr__(self):
         return str(self.id)
+
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
