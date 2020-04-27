@@ -67,17 +67,21 @@ def delete_task():
 @main.route('/update_task/<id>',methods=['GET','POST'])
 def update_task(id):
     old_name = request.form['task_oldname']
-    old_date = request.form['task_newdate']
+    old_date = request.form['task_olddate']
     name = request.form['task_newname']
     date = request.form['task_newdate']
-    taskToUpdate = Tasks.query.get(id)
-    if name=="":
-        taskToUpdate.task_name = old_name
-    elif date=="":
+    taskToUpdate = Tasks.query.filter_by(id=id).first()
+    taskToUpdate.task_name = name
+    taskToUpdate.date = date
+    if name=="" and date=="":
         taskToUpdate.date = old_date
-    elif date=="" and name=="":
-        taskToUpdate.task_name = old_name  
-        taskToUpdate.date = old_date  
+        taskToUpdate.task_name = old_name
+    elif name=="":
+        taskToUpdate.task_name = old_name
+        taskToUpdate.task_date = date
+    elif date=="":
+        taskToUpdate.task_name = name
+        taskToUpdate.date = old_date
     else:
         taskToUpdate.task_name = name  
         taskToUpdate.date = date          
