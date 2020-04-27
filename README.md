@@ -102,7 +102,7 @@ CREATE TABLE tasks (
 
 ### __Additional requirements__
 1. It should work like one page WEB application and should use AJAX
-technology, load and submit data without reloading a page. - 30% 
+technology, load and submit data without reloading a page. - 50% 
 2. It should have user authentication solution and a user should only have access to their own projects and tasks. - 100%
 3. It should have automated tests for the all functionality - 5%
 
